@@ -36,7 +36,7 @@
 
 	<name>Dataspace Connector</name>
 	<description>IDS Connector reference implementation</description>
-	<url>https://github.com/International-Data-Spaces-Association/DataspaceConnector</url>
+	<url>https://github.com/gate-institute/DataspaceConnector</url>
 	<inceptionYear>2020-2022</inceptionYear>
 	<organization>
 		<name>sovity GmbH</name>
@@ -52,12 +52,12 @@
 
 	<issueManagement>
 		<system>Github</system>
-		<url>https://github.com/International-Data-Spaces-Association/DataspaceConnector/issues</url>
+		<url>https://github.com/gate-institute/DataspaceConnector/issues</url>
 	</issueManagement>
 
 	<properties>
 		<!-- General -->
-		<revision>8.0.2</revision>
+		<revision>8.0.2-G1</revision>
 		<email>support@sovity.de</email>
 
 		<!-- Build info -->
@@ -66,7 +66,7 @@
 		<maven.minimum.version>3.3.9</maven.minimum.version>
 
 		<!-- IDS -->
-		<ids-messaging-services.version>7.0.0</ids-messaging-services.version>
+		<ids-messaging-services.version>7.0.1-G1</ids-messaging-services.version>
 
 		<!-- Dependencies -->
 		<springframework.version>5.3.23</springframework.version>
@@ -126,7 +126,7 @@
 
 	<dependencies>
 
-		<!-- https://github.com/International-Data-Spaces-Association/IDS-Messaging-Services -->
+		<!-- https://github.com/gate-institute/IDS-Messaging-Services -->
 		<dependency>
 			<groupId>ids.messaging</groupId>
 			<artifactId>broker</artifactId>
@@ -669,6 +669,11 @@
 			<id>eis-public-repo</id>
 			<url>http://maven.iais.fraunhofer.de/artifactory/eis-ids-public</url>
 		</repository>
+        <repository>
+            <id>gate-github</id>
+            <name>GitHub gate-institute IDS-Messaging-Services Apache Maven Packages</name>
+            <url>https://maven.pkg.github.com/gate-institute/IDS-Messaging-Services</url>
+        </repository>
 	</repositories>
 
 	<dependencyManagement>
