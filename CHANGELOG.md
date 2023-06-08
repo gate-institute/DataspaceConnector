@@ -2,6 +2,11 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
+## [8.0.2-G1.0.1] - 2023-06-08
+
+### Changed
+ - ClearingHouseService to handle exception when transfer contract is null (which is the case with app download)
+
 ## [X.X.X] - XXXX-XX-XX
 
 ### Changed
