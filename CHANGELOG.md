@@ -2,6 +2,12 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
+## [8.0.2-G2] - 2023-07-20
+
+### Fixed
+ - openapi.yaml was missing some fields; additional artifactType field added to ArtifactDesc
+ - a genuine bug fixed in NonOwningRelationshipService.java which prevented replacement of "inverted resources" (resources in which the "childs" are actually "parent", e.g. PUT /api/offers/{id}/catalogs) from working 
+
 ## [8.0.2-G1] - 2023-06-08
 
 ### Changed

@@ -57,7 +57,7 @@
 
 	<properties>
 		<!-- General -->
-		<revision>8.0.2-G1</revision>
+		<revision>8.0.2-G2</revision>
 		<email>support@sovity.de</email>
 
 		<!-- Build info -->

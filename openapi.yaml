@@ -3349,7 +3349,12 @@ paths:
               format: uri
       requestBody:
         content:
-          application/json: {}
+          application/json:
+            schema:
+              type: array
+              items:
+                type: string
+                format: uri
       responses:
         "200":
           description: Ok
@@ -6647,6 +6652,10 @@ components:
           enum:
             - Database
             - REST
+        url:
+          type: string
+        driverClassName:
+          type: string
         _links:
           $ref: '#/components/schemas/Links'
     DapsDesc:
@@ -6849,6 +6858,8 @@ components:
           format: uri
         version:
           type: string
+        publicKey:
+          type: string
         curator:
           type: string
           format: uri
@@ -7027,6 +7038,8 @@ components:
           type: string
         automatedDownload:
           type: boolean
+        artifactType:
+          type: string
     ArtifactView:
       type: object
       properties:
