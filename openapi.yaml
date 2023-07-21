@@ -3941,7 +3941,7 @@ paths:
           content:
             '*/*':
               schema:
-                type: object
+                type: string
         "504":
           description: Gateway timeout
           content:
