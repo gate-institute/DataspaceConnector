@@ -3932,7 +3932,7 @@ paths:
         content:
           application/json:
             schema:
-              type: string
+              type: object
               description: The search term.
         required: true
       responses:
@@ -4137,7 +4137,7 @@ paths:
           content:
             '*/*':
               schema:
-                type: object
+                type: string
         "504":
           description: Gateway timeout
           content:
@@ -4257,13 +4257,8 @@ paths:
         content:
           application/json:
             schema:
-              type: array
+              type: object
               description: List of ids rules with an artifact id as target.
-              items:
-                oneOf:
-                  - $ref: '#/components/schemas/Duty'
-                  - $ref: '#/components/schemas/Permission'
-                  - $ref: '#/components/schemas/Prohibition'
         required: true
       responses:
         "417":
@@ -6325,9 +6320,9 @@ components:
             - None
             - Camel
         start:
-          $ref: '#/components/schemas/Endpoint'
+          type: object
         end:
-          $ref: '#/components/schemas/Endpoint'
+          type: object
         additional:
           type: object
           additionalProperties:
@@ -7634,7 +7629,8 @@ components:
         page:
           $ref: '#/components/schemas/PageMetadata'
     StreamingResponseBody:
-      type: object
+      type: string
+      format: byte
     RepresentationModelObject:
       type: object
       properties:
@@ -7800,16 +7796,16 @@ components:
           items:
             type: string
             enum:
-              - Provide unrestricted data access
-              - Prohibit the data access
-              - Restrict the data usage to not more than N times
-              - Restrict the data usage to a specific time duration
-              - Restrict the data usage to a specific time interval
-              - Use data and delete it at a specific date time
-              - Log the data usage information
-              - Notify a party or a specific group of users when the data is used
-              - Restrict the data usage to a specific connector
-              - Restrict the data usage to a security profile
+              - PROVIDE_ACCESS
+              - PROHIBIT_ACCESS
+              - N_TIMES_USAGE
+              - DURATION_USAGE
+              - USAGE_DURING_INTERVAL
+              - USAGE_UNTIL_DELETION
+              - USAGE_LOGGING
+              - USAGE_NOTIFICATION
+              - CONNECTOR_RESTRICTED_USAGE
+              - SECURITY_PROFILE_RESTRICTED_USAGE
         keywords:
           type: array
           items:
