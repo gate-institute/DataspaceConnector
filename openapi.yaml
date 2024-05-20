@@ -4573,13 +4573,13 @@ paths:
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/PagedModelObject'
+                $ref: '#/components/schemas/PagedModelEndpoint'
         "401":
           description: Unauthorized
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/PagedModelObject'
+                $ref: '#/components/schemas/PagedModelEndpoint'
     post:
       tags:
         - Endpoints
@@ -7664,13 +7664,13 @@ components:
           $ref: '#/components/schemas/Links'
         page:
           $ref: '#/components/schemas/PageMetadata'
-    PagedModelObject:
+    PagedModelEndpoint:
       type: object
       properties:
         _embedded:
           type: object
           properties:
-            objectList:
+            endpoints:
               type: array
               items:
                 type: object
@@ -7855,9 +7855,9 @@ components:
         type:
           type: string
           enum:
-            - App
-            - Connector
-            - Generic
+            - APP
+            - CONNECTOR
+            - GENERIC
         creationDate:
           type: string
           format: date-time

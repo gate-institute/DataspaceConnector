@@ -57,8 +57,8 @@
 
 	<properties>
 		<!-- General -->
-		<revision>8.0.2-G2</revision>
-		<email>support@sovity.de</email>
+		<revision>8.0.2-G3</revision>
+		<email>support@gate-ai.eu</email>
 
 		<!-- Build info -->
 		<java.version>17</java.version>
