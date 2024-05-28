@@ -57,7 +57,7 @@
 
 	<properties>
 		<!-- General -->
-		<revision>8.0.2-G3</revision>
+		<revision>8.0.2-G4</revision>
 		<email>support@gate-ai.eu</email>
 
 		<!-- Build info -->
@@ -628,6 +628,15 @@
 			<groupId>org.bitbucket.b_c</groupId>
 			<artifactId>jose4j</artifactId>
 			<version>0.9.2</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-oauth2-client</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-oauth2-resource-server</artifactId>
 		</dependency>
 
 	</dependencies>
