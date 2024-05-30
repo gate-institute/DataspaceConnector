@@ -57,7 +57,7 @@
 
 	<properties>
 		<!-- General -->
-		<revision>8.0.2-G4</revision>
+		<revision>8.0.2-G5</revision>
 		<email>support@gate-ai.eu</email>
 
 		<!-- Build info -->
