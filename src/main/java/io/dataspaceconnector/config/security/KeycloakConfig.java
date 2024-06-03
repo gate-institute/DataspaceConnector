@@ -5,60 +5,38 @@ import java.security.NoSuchAlgorithmException;
 import java.security.interfaces.RSAPublicKey;
 import java.security.spec.InvalidKeySpecException;
 import java.util.Collection;
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import org.apache.camel.util.json.JsonObject;
 import org.jose4j.jwk.JsonWebKeySet;
 import org.jose4j.jwk.RsaJsonWebKey;
 import org.jose4j.lang.JoseException;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.annotation.Order;
 import org.springframework.core.convert.converter.Converter;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
-import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
-import org.springframework.security.authentication.AuthenticationProvider;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.authority.mapping.GrantedAuthoritiesMapper;
 import org.springframework.security.core.session.SessionRegistry;
 import org.springframework.security.core.session.SessionRegistryImpl;
-import org.springframework.security.oauth2.client.web.OAuth2AuthorizationRequestRedirectFilter;
 import org.springframework.security.oauth2.core.oidc.user.OidcUserAuthority;
 import org.springframework.security.oauth2.core.user.OAuth2UserAuthority;
 import org.springframework.security.oauth2.jwt.Jwt;
 import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationConverter;
-import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationToken;
-import org.springframework.security.oauth2.server.resource.authentication.JwtGrantedAuthoritiesConverter;
-import org.springframework.security.oauth2.server.resource.web.BearerTokenAuthenticationFilter;
 import org.springframework.security.web.SecurityFilterChain;
-import org.springframework.security.web.access.ExceptionTranslationFilter;
 import org.springframework.security.web.authentication.session.RegisterSessionAuthenticationStrategy;
 import org.springframework.security.web.authentication.session.SessionAuthenticationStrategy;
 import org.springframework.security.web.session.HttpSessionEventPublisher;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
-import org.springframework.util.LinkedMultiValueMap;
-import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestTemplate;
-
-import io.jsonwebtoken.Claims;
-import io.jsonwebtoken.Jws;
-import io.jsonwebtoken.Jwts;
 
 @Configuration
 @EnableWebSecurity
@@ -124,8 +102,8 @@ public class KeycloakConfig {
     public SecurityFilterChain resourceServerFilterChain(HttpSecurity http)
             throws Exception {
         http.authorizeRequests(auth -> auth
-                .requestMatchers(new AntPathRequestMatcher("/api/**", HttpMethod.OPTIONS.name())).permitAll()
                 .requestMatchers(new AntPathRequestMatcher("/api/ids/data")).permitAll()
+                .requestMatchers(new AntPathRequestMatcher("/api/**", HttpMethod.OPTIONS.name())).permitAll()
                 .requestMatchers(new AntPathRequestMatcher("/")).permitAll()
                 // .requestMatchers(new AntPathRequestMatcher("/login/**")).permitAll()
                 .requestMatchers(new AntPathRequestMatcher("/api/subscriptions/**")).authenticated()
@@ -133,6 +111,7 @@ public class KeycloakConfig {
                 .requestMatchers(new AntPathRequestMatcher("/actuator/**")).hasRole(ADMIN)
                 .requestMatchers(new AntPathRequestMatcher("/database/**")).hasRole(ADMIN)
                 .anyRequest().authenticated());
+        http.csrf(csrf -> csrf.disable());
         http.oauth2ResourceServer(oauth2 -> oauth2.jwt(jwt ->
                         jwt.jwtAuthenticationConverter(jwtAuthenticationConverterForKeycloak())));
         http.oauth2Login(Customizer.withDefaults())
