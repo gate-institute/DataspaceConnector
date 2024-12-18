@@ -77,7 +77,7 @@ public class RouteReDeployer extends TransactionCallbackWithoutResult {
     private void redeploy(final Route route) {
         try {
             routeHelper.deploy(route);
-        } catch (RouteCreationException exception) {
+        } catch (Exception exception) {
             log.warn("Failed to redeploy persisted route. [routeId=({}), exception=({})]",
                     route.getId(), exception.getMessage());
         }

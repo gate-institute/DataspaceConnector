@@ -86,7 +86,7 @@ public abstract class NonOwningRelationService<
     public final void replaceInternal(final UUID ownerId, final Set<UUID> entities) {
         final var set = Set.of(ownerId);
         final var allRelations =
-                getOneService().getAll(Pageable.unpaged()).stream().map(Entity::getId)
+                getManyService().getAll(Pageable.unpaged()).stream().map(Entity::getId)
                                .collect(Collectors.toList());
 
         for (final var id : allRelations) {

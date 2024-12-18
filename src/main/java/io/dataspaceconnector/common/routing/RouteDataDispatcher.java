@@ -84,6 +84,7 @@ public class RouteDataDispatcher {
             final var result = template
                     .send(camelDirect, ExchangeBuilder.anExchange(context)
                             .withProperty(ParameterUtils.QUERY_INPUT_PARAM, queryInput)
+                            .withHeader("Content-Type", "application/json")
                             .withBody(data)
                             .build());
 

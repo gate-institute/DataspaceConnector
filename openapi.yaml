@@ -3349,7 +3349,12 @@ paths:
               format: uri
       requestBody:
         content:
-          application/json: {}
+          application/json:
+            schema:
+              type: array
+              items:
+                type: string
+                format: uri
       responses:
         "200":
           description: Ok
@@ -3927,7 +3932,7 @@ paths:
         content:
           application/json:
             schema:
-              type: string
+              type: object
               description: The search term.
         required: true
       responses:
@@ -3936,7 +3941,7 @@ paths:
           content:
             '*/*':
               schema:
-                type: object
+                type: string
         "504":
           description: Gateway timeout
           content:
@@ -4132,7 +4137,7 @@ paths:
           content:
             '*/*':
               schema:
-                type: object
+                type: string
         "504":
           description: Gateway timeout
           content:
@@ -4252,13 +4257,8 @@ paths:
         content:
           application/json:
             schema:
-              type: array
+              type: object
               description: List of ids rules with an artifact id as target.
-              items:
-                oneOf:
-                  - $ref: '#/components/schemas/Duty'
-                  - $ref: '#/components/schemas/Permission'
-                  - $ref: '#/components/schemas/Prohibition'
         required: true
       responses:
         "417":
@@ -4573,13 +4573,13 @@ paths:
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/PagedModelObject'
+                $ref: '#/components/schemas/PagedModelEndpoint'
         "401":
           description: Unauthorized
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/PagedModelObject'
+                $ref: '#/components/schemas/PagedModelEndpoint'
     post:
       tags:
         - Endpoints
@@ -6320,9 +6320,9 @@ components:
             - None
             - Camel
         start:
-          $ref: '#/components/schemas/Endpoint'
+          type: object
         end:
-          $ref: '#/components/schemas/Endpoint'
+          type: object
         additional:
           type: object
           additionalProperties:
@@ -6647,6 +6647,10 @@ components:
           enum:
             - Database
             - REST
+        url:
+          type: string
+        driverClassName:
+          type: string
         _links:
           $ref: '#/components/schemas/Links'
     DapsDesc:
@@ -6849,6 +6853,8 @@ components:
           format: uri
         version:
           type: string
+        publicKey:
+          type: string
         curator:
           type: string
           format: uri
@@ -7027,6 +7033,8 @@ components:
           type: string
         automatedDownload:
           type: boolean
+        artifactType:
+          type: string
     ArtifactView:
       type: object
       properties:
@@ -7621,7 +7629,8 @@ components:
         page:
           $ref: '#/components/schemas/PageMetadata'
     StreamingResponseBody:
-      type: object
+      type: string
+      format: byte
     RepresentationModelObject:
       type: object
       properties:
@@ -7655,13 +7664,13 @@ components:
           $ref: '#/components/schemas/Links'
         page:
           $ref: '#/components/schemas/PageMetadata'
-    PagedModelObject:
+    PagedModelEndpoint:
       type: object
       properties:
         _embedded:
           type: object
           properties:
-            objectList:
+            endpoints:
               type: array
               items:
                 type: object
@@ -7787,16 +7796,16 @@ components:
           items:
             type: string
             enum:
-              - Provide unrestricted data access
-              - Prohibit the data access
-              - Restrict the data usage to not more than N times
-              - Restrict the data usage to a specific time duration
-              - Restrict the data usage to a specific time interval
-              - Use data and delete it at a specific date time
-              - Log the data usage information
-              - Notify a party or a specific group of users when the data is used
-              - Restrict the data usage to a specific connector
-              - Restrict the data usage to a security profile
+              - PROVIDE_ACCESS
+              - PROHIBIT_ACCESS
+              - N_TIMES_USAGE
+              - DURATION_USAGE
+              - USAGE_DURING_INTERVAL
+              - USAGE_UNTIL_DELETION
+              - USAGE_LOGGING
+              - USAGE_NOTIFICATION
+              - CONNECTOR_RESTRICTED_USAGE
+              - SECURITY_PROFILE_RESTRICTED_USAGE
         keywords:
           type: array
           items:
@@ -7846,9 +7855,9 @@ components:
         type:
           type: string
           enum:
-            - App
-            - Connector
-            - Generic
+            - APP
+            - CONNECTOR
+            - GENERIC
         creationDate:
           type: string
           format: date-time

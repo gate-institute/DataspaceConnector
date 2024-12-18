@@ -17,16 +17,8 @@
 # Build application
 FROM maven:3-eclipse-temurin-17 AS builder
 WORKDIR /app
-COPY pom.xml .
-## Dependencies
-RUN mvn -e -B dependency:resolve && \
-    mvn -e -B dependency:resolve-plugins
-## Classes
-COPY src/main/java ./src/main/java
-COPY src/main/resources ./src/main/resources
-## Build
-RUN mvn -e -B clean package -DskipTests -Dmaven.javadoc.skip=true && \
-    java -Djarmode=layertools -jar /app/target/dataspaceconnector.jar extract
+COPY target/dataspaceconnector.jar .
+RUN java -Djarmode=layertools -jar /app/dataspaceconnector.jar extract
 
 # JRE
 FROM eclipse-temurin:17 as jre-builder

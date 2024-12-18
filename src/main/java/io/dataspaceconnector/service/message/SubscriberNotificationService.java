@@ -326,9 +326,11 @@ public class SubscriberNotificationService {
                 if (data == null) {
                     dataCopy = InputStream.nullInputStream();
                 } else {
-                    // Reset the input stream to first position before each read.
-                    if (0 <= data.available()) {
-                        data.reset();
+                    // Reset the input stream to first position before each read (if supported)
+                    if(data.markSupported()) {
+                        if (data.available() > 0) {
+                            data.reset();
+                        }
                     }
                     dataCopy = data;
                 }

@@ -104,7 +104,7 @@ public class ClearingHouseService {
                                     UUIDUtils.uuidFromUri(idsMessage.getTransferContract());
                 final var url = buildDestination(URI.create(transferContractId.toString()));
                 logMessageSvc.sendMessage(url, idsMessage.toRdf());
-            } catch (UUIDFormatException | PolicyExecutionException exception) {
+            } catch (Exception exception) {
                 if (log.isWarnEnabled()) {
                     log.warn("Failed to log message to clearing house. [exception=({})]",
                             exception.getMessage());

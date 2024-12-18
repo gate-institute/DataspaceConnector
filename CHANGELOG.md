@@ -2,6 +2,19 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
+## [8.0.2-G2] - 2023-07-20
+
+### Fixed
+ - openapi.yaml was missing some fields; additional artifactType field added to ArtifactDesc
+ - a genuine bug fixed in NonOwningRelationshipService.java which prevented replacement of "inverted resources" (resources in which the "childs" are actually "parent", e.g. PUT /api/offers/{id}/catalogs) from working 
+
+## [8.0.2-G1] - 2023-06-08
+
+### Changed
+ - Change build procedure (first do mvnw package, then docker build)
+ - Use 7.0.1-G1 version of ids-messagingservice
+ - ClearingHouseService to handle exception when transfer contract is null (which is the case with app download)
+
 ## [X.X.X] - XXXX-XX-XX
 
 ### Changed
